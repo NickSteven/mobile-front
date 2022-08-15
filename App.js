@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, Text, View } from 'react-native';
+import Navigation from './navigation/Navigation';
 
 export default App = () => {
   const [isLoading, setLoading] = useState(true);
@@ -7,7 +8,7 @@ export default App = () => {
 
   const getMovies = async () => {
      try {
-      const response = await fetch('http://192.168.88.29:3000/produits');
+      const response = await fetch('http://192.168.0.103:3000/employes');
       const json = await response.json();
       setData(json);
     } catch (error) {
@@ -22,16 +23,8 @@ export default App = () => {
   }, []);
 
   return (
-    <View style={{ flex: 1, padding: 24 }}>
-      {isLoading ? <ActivityIndicator/> : (
-        <FlatList
-          data={data}
-          keyExtractor={({ prd_id }, index) => prd_id}
-          renderItem={({ item }) => (
-            <Text>{item.design}, {item.stock}</Text>
-          )}
-        />
-      )}
+    <View style={{ flex: 1, padding: 0 }}>
+      <Navigation/>
     </View>
   );
 };
